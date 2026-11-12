@@ -1,0 +1,7 @@
+apiVersion: crd.projectcalico.org/v1
+kind: BGPPeer
+metadata:
+  name: opnsense-router
+spec:
+  peerIP: 192.168.1.1
+  asNumber: 65551

@@ -9,16 +9,16 @@ spec:
         repoURL: https://github.com/skni-kod/kubernetes-cluster
         revision: main
         directories:
-          - path: infrstructure/*
+          - path: infrastructure/*
   template:
     metadata:
-      name: infra-${{ path.basename }}
+      name: infra-{{ path.basename }}
     spec:
       project: default
       source:
         repoURL: https://github.com/skni-kod/kubernetes-cluster
         targetRevision: main
-        path: ${{ path }}
+        path: "{{path}}"
       destination:
         server: https://kubernetes.default.svc
         namespace: default
