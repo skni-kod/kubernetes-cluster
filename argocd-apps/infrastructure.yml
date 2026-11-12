@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-infrastructure
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/skni-kod/kubernetes-cluster
+        revision: main
+        directories:
+          - path: infrstructure/*
+  template:
+    metadata:
+      name: infra-${{ path.basename }}
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/skni-kod/kubernetes-cluster
+        targetRevision: main
+        path: ${{ path }}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
