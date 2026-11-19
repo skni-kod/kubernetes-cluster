@@ -1,0 +1,30 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: my-postgres
+  namespace: database
+spec:
+  instances: 2
+
+  affinity:
+    enablePodAntiAffinity: true
+    topologyKey: kubernetes.io/hostname
+
+  bootstrap:
+    initdb:
+      database: myappdb
+      owner: myappuser
+      secret:
+        name: pg-app-user
+
+  storage:
+    storageClass: longhorn-cnpg
+    size: 2Gi
+
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "125m"
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
