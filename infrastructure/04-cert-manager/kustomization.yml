@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
   - https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.yaml
   - letsencrypt-prod.yml
+  - tls-store.yml
+  - wildcard-certificate.yml
 
 commonAnnotations:
   argocd.argoproj.io/sync-wave: "4"

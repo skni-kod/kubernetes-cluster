@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: k8s-sknikod-tls
+  namespace: traefik
+spec:
+  secretName: k8s-sknikod-tls-secret
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - sknikod.com
+    - "*.sknikod.com"

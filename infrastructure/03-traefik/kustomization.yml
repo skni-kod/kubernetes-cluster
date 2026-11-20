@@ -6,6 +6,7 @@ resources:
   - traefik-ingressclass.yml
   - traefik-rbac.yml
   - traefik-service.yml
+  - https://raw.githubusercontent.com/traefik/traefik/v3.1/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml
 
 commonAnnotations:
   argocd.argoproj.io/sync-wave: "3"
