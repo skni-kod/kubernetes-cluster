@@ -4,5 +4,6 @@ metadata:
   name: public-services-pool
   namespace: metallb-system
 spec:
+  avoidBuggyIPs: true
   addresses:
-    - 10.213.0.0/16
+    - 10.213.0.0/24
