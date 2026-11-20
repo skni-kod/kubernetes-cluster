@@ -1,0 +1,5 @@
+{
+    "appName": "k8s-test-app",
+    "env": "staging",
+    "imageList": "backend=ghcr.io/skni-kod/k8s-test-app-backend, frontend=ghcr.io/skni-kod/k8s-test-app-frontend"
+}
