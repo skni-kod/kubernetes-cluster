@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: workloads-staging
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/skni-kod/kubernetes-cluster
+        revision: main
+        files:
+          - path: workloads/*/overlays/staging/config.json
+
+  template:
+    metadata:
+      name: "{{appName}}-{{env}}"
+      annotations:
+        argocd-image-update.argoproj.io/imageList: "{{imageList}}"
+        argocd-image-update.argoproj.io/write-back-method: git
+        argocd-image-update.argoproj.io/git-branch: main
+        argocd-image-update.argoproj.io/kustomize.image-updates: "true"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/skni-kod/kubernetes-cluster
+        targetRevision: main
+        path: "workloads/{{appName}}/overlays/{{env}}"
+      destination:
+        namespace: "{{appName}}-{{env}}"
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
