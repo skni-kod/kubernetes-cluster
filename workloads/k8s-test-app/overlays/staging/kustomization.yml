@@ -10,4 +10,4 @@ images:
   - name: ghcr.io/skni-kod/k8s-test-app-frontend
     newTag: sha-233bcd2d6dd1710d9e16b9db72a1edce65dee729
   - name: ghcr.io/skni-kod/k8s-test-app-backend
-    newTag: staging-latest
+    newTag: sha-b6d7ff707e2abd610be1a4f85b9d87983d52d255
